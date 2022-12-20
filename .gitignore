@@ -1,0 +1,13 @@
+*.autosave
+*.db
+*.o
+*.psp
+*.pyc
+*.pyo
+*.swo
+*.swp
+.DS_Store
+.idea
+.vscode
+/*.diff
+/*.patch

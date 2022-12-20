@@ -103,6 +103,8 @@ FROM atchondjo/alpine as env-builder
 COPY --from=app-builder /pgadmin4/requirements.txt /
 # COPY requirements.txt /
 RUN  set -eux; \
+    apk update; \
+    apk upgrade; \
     apk add --no-cache \
         make \
         python3 \
@@ -230,6 +232,8 @@ COPY --from=app-builder /pgadmin4/LICENSE /pgadmin4/LICENSE
 
 # Install runtime dependencies and configure everything in one RUN step
 RUN set -eux; \
+    apk update; \
+    apk upgrade; \
     apk add \
         python3 \
         py3-pip \

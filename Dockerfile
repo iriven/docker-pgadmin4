@@ -43,7 +43,7 @@ RUN set -eux; \
     # chmod +x /usr/local/bin/docker-pgadmin4-source; \
     apk add --no-cache --virtual .fetch-deps gnupg; \
     \
-    mkdir -p /usr/src/pgadmin4 /pgadmin4; \
+    mkdir -p /usr/src /pgadmin4; \
     cd /usr/src; \
     \
     PKG_URL="${PGADMIN4_BASE_URL}/v${PGADMIN4_VERSION}/source/pgadmin4-${PGADMIN4_VERSION}.tar.gz"; \

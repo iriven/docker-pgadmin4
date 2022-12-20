@@ -1,7 +1,8 @@
 #!/bin/sh
 set -e
 
-dir=/usr/src/pgadmin4
+srcLocation=/usr/src/pgadmin4
+pkgLocation=$(dirname "$srcLocation")
 
 usage() {
 	echo "usage: $0 COMMAND"
@@ -9,25 +10,24 @@ usage() {
 	echo "Manage pgadmin4 source tarball lifecycle."
 	echo
 	echo "Commands:"
-	echo "   extract  extract pgadmin4 source tarball into directory $dir if not already done."
-	echo "   delete   delete extracted pgadmin4 source located into $dir if not already done."
+	echo "   extract  extract pgadmin4 source tarball into directory $srcLocation if not already done."
+	echo "   delete   delete extracted pgadmin4 source located into $srcLocation if not already done."
 	echo
 }
 
 case "$1" in
 	extract)
-		mkdir -p "$dir"
-		if [ ! -f "$dir/.docker-extracted" ]; then
-			tar -xzvf /usr/src/pgadmin4.tar.gz -C "$dir" --strip-components=1
-			touch "$dir/.docker-extracted"
+		mkdir -p "$srcLocation"
+		if [ ! -f "$srcLocation/.docker-extracted" ]; then
+			tar -xzvf $pkgLocation/pgadmin4.tar.gz -C "$srcLocation" --strip-components=1
+			touch "$srcLocation/.docker-extracted"
 		fi
 		;;
 	delete)
-		topDirectory=$(dirname "$dir")
-		if [ -f "$topDirectory/pgadmin4.tar.gz" ]; then
-			rm $topDirectory/pgadmin4.tar.gz*
+		if [ -f "$pkgLocation/pgadmin4.tar.gz" ]; then
+			rm $pkgLocation/pgadmin4.tar.gz*
 		fi
-		rm -rf "$dir"
+		rm -rf "$srcLocation"
 		;;
 	*)
 		usage
